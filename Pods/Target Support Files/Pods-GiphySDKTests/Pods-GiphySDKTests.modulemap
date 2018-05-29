@@ -1,0 +1,6 @@
+framework module Pods_GiphySDKTests {
+  umbrella header "Pods-GiphySDKTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
