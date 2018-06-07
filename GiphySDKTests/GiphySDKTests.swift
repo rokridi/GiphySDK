@@ -2,7 +2,7 @@
 //  GiphySDKTests.swift
 //  GiphySDKTests
 //
-//  Created by Mohamed Aymen Landolsi on 29/05/2018.
+//  Created by Mohamed Aymen Landolsi on 07/06/2018.
 //  Copyright © 2018 Rokridi. All rights reserved.
 //
 
