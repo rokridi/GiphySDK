@@ -1,0 +1,147 @@
+//
+//  GPHImages.swift
+//  GiphySDK
+//
+//  Created by Mohamed Aymen Landolsi on 08/06/2018.
+//  Copyright © 2018 Rokridi. All rights reserved.
+//
+
+import Foundation
+
+public struct GPHImages: Decodable {
+    
+    enum CodingKeys: String, CodingKey {
+        case fixedHeight = "fixed_height"
+        case fixedHeightStill = "fixed_height_still"
+        case fixedHeightDownsampled = "fixed_height_downsampled"
+        case fixedWidth = "fixed_width"
+        case fixedWidthStill = "fixed_width_still"
+        case fixedWidthDownsampled = "fixed_width_downsampled"
+        case fixedHeightSmall = "fixed_height_small"
+        case fixedHeightSmallStill = "fixed_height_small_still"
+        case fixedWidthSmall = "fixed_width_small"
+        case fixedWidthSmallStill = "fixed_width_small_still"
+        case preview
+        case downsizedSmall = "downsized_small"
+        case downsized
+        case downsizedMedium = "downsized_medium"
+        case downsizedLarge = "downsized_large"
+        case downsizedStill = "downsized_still"
+        case original
+        case originalStill = "original_still"
+        case looping
+    }
+    
+    /// Height set to 200px. Good for mobile use.
+    private(set) var fixedHeight: GPHImage
+    
+    /// Static preview image for fixed_height
+    private(set) var fixedHeightStill: GPHImage
+    
+    /// Height set to 200px. Reduced to 6 frames to minimize file size to the lowest.
+    /// Works well for unlimited scroll on mobile and as animated previews. See Giphy.com on mobile web as an example.
+    private(set) var fixedHeightDownsampled: GPHImage
+    
+    /// Width set to 200px. Good for mobile use.
+    private(set) var fixedWidth: GPHImage
+    
+    /// Static preview image for fixed_width
+    private(set) var fixedWidthStill: GPHImage
+    
+    /// Width set to 200px. Reduced to 6 frames. Works well for unlimited scroll on mobile and as animated previews.
+    private(set) var fixedWidthDownsampled: GPHImage
+    
+    /// Height set to 100px. Good for mobile keyboards.
+    private(set) var fixedHeightSmall: GPHImage
+    
+    /// Static preview image for fixed_height_small
+    private(set) var fixedHeightSmallStill: GPHImage
+    
+    /// Width set to 100px. Good for mobile keyboards.
+    private(set) var fixedWidthSmall: GPHImage
+    
+    /// Static preview image for fixed_width_small
+    private(set) var fixedWidthSmallStill: GPHImage
+    
+    /// File size under 50kb. Duration may be truncated to meet file size requirements. Good for thumbnails and previews.
+    private(set) var preview: GPHImage
+    
+    /// File size under 200kb.
+    private(set) var downsizedSmall: GPHImage
+    
+    /// File size under 2mb.
+    private(set) var downsized: GPHImage
+    
+    /// File size under 5mb.
+    private(set) var downsizedMedium: GPHImage
+    
+    /// File size under 8mb.
+    private(set) var downsizedLarge: GPHImage
+    
+    /// Static preview image for downsized.
+    private(set) var downsizedStill: GPHImage
+    
+    /// Original file size and file dimensions. Good for desktop use.
+    private(set) var original: GPHImage
+    
+    /// Preview image for original.
+    private(set) var originalStill: GPHImage
+    
+    /// Duration set to loop for 15 seconds. Only recommended for this exact use case.
+    private(set) var looping: GPHImage
+    
+    // MARK: Init
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        fixedHeight = try container.decode(GPHImage.self, forKey: .fixedHeight)
+        fixedHeightStill = try container.decode(GPHImage.self, forKey: .fixedHeightStill)
+        fixedHeightDownsampled = try container.decode(GPHImage.self, forKey: .fixedHeightDownsampled)
+        fixedWidth = try container.decode(GPHImage.self, forKey: .fixedWidth)
+        fixedWidthStill = try container.decode(GPHImage.self, forKey: .fixedWidthStill)
+        fixedWidthDownsampled = try container.decode(GPHImage.self, forKey: .fixedWidthDownsampled)
+        fixedHeightSmall = try container.decode(GPHImage.self, forKey: .fixedHeightSmall)
+        fixedHeightSmallStill = try container.decode(GPHImage.self, forKey: .fixedHeightSmallStill)
+        fixedWidthSmall = try container.decode(GPHImage.self, forKey: .fixedWidthSmall)
+        fixedWidthSmallStill = try container.decode(GPHImage.self, forKey: .fixedWidthSmallStill)
+        preview = try container.decode(GPHImage.self, forKey: .preview)
+        downsizedSmall = try container.decode(GPHImage.self, forKey: .downsizedSmall)
+        downsized = try container.decode(GPHImage.self, forKey: .downsized)
+        downsizedMedium = try container.decode(GPHImage.self, forKey: .downsizedMedium)
+        downsizedLarge = try container.decode(GPHImage.self, forKey: .downsizedLarge)
+        downsizedStill = try container.decode(GPHImage.self, forKey: .downsizedStill)
+        original = try container.decode(GPHImage.self, forKey: .original)
+        originalStill = try container.decode(GPHImage.self, forKey: .originalStill)
+        looping = try container.decode(GPHImage.self, forKey: .looping)
+        
+        setRenditions()
+    }
+}
+
+// MARK: Renditions
+
+extension GPHImages {
+    
+    private mutating func setRenditions() {
+        fixedHeight._rendition = .fixedHeight
+        fixedHeightStill._rendition = .fixedHeightStill
+        fixedHeightDownsampled._rendition = .fixedHeightDownsampled
+        fixedWidth._rendition = .fixedWidth
+        fixedWidthStill._rendition = .fixedWidthStill
+        fixedWidthDownsampled._rendition = .fixedWidthDownsampled
+        fixedHeightSmall._rendition = .fixedHeightSmall
+        fixedHeightSmallStill._rendition = .fixedHeightSmallStill
+        fixedWidthSmall._rendition = .fixedWidthSmall
+        fixedWidthSmallStill._rendition = .fixedWidthSmallStill
+        preview._rendition = .preview
+        downsizedSmall._rendition = .downsizedSmall
+        downsized._rendition = .downsized
+        downsizedMedium._rendition = .downsizedMedium
+        downsizedLarge._rendition = .downsizedLarge
+        downsizedStill._rendition = .downsizedStill
+        original._rendition = .original
+        originalStill._rendition = .originalStill
+        looping._rendition = .looping
+    }
+}
