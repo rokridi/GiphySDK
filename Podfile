@@ -12,7 +12,7 @@ target 'GiphySDK' do
     inherit! :search_paths
     # Pods for testing
     pod 'Quick'
-    pod 'Nimble', '~> 6.0.0'
+    #pod 'Nimble', '~> 6.0.0'
     pod 'OHHTTPStubs/Swift'
   end
 

@@ -103,6 +103,10 @@ public enum GPHImageRendition: String {
     
     /// Duration set to loop for 15 seconds. Only recommended for this exact use case.
     case looping
+    
+    case originalMp4 = "original_mp4"
+    case previewGif = "preview_gif"
+    case still480w = "480w_still"
 }
 
 /// Represents Giphy APIs Supported Languages

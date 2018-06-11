@@ -30,6 +30,9 @@ public struct GPHImages: Decodable {
         case original
         case originalStill = "original_still"
         case looping
+        case originalMp4 = "original_mp4"
+        case previewGif = "preview_gif"
+        case still480w = "480w_still"
     }
     
     /// Height set to 200px. Good for mobile use.
@@ -90,6 +93,12 @@ public struct GPHImages: Decodable {
     /// Duration set to loop for 15 seconds. Only recommended for this exact use case.
     private(set) var looping: GPHImage
     
+    private(set) var originalMp4: GPHImage
+    private(set) var previewGif: GPHImage
+    private(set) var still480w: GPHImage
+    
+    
+    
     // MARK: Init
     
     public init(from decoder: Decoder) throws {
@@ -114,6 +123,9 @@ public struct GPHImages: Decodable {
         original = try container.decode(GPHImage.self, forKey: .original)
         originalStill = try container.decode(GPHImage.self, forKey: .originalStill)
         looping = try container.decode(GPHImage.self, forKey: .looping)
+        originalMp4 = try container.decode(GPHImage.self, forKey: .originalMp4)
+        previewGif = try container.decode(GPHImage.self, forKey: .previewGif)
+        still480w = try container.decode(GPHImage.self, forKey: .still480w)
         
         setRenditions()
     }
@@ -143,5 +155,8 @@ extension GPHImages {
         original._rendition = .original
         originalStill._rendition = .originalStill
         looping._rendition = .looping
+        originalMp4._rendition = .originalMp4
+        previewGif._rendition = .previewGif
+        still480w._rendition = .still480w
     }
 }
