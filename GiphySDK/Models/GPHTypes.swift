@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents media type
-public enum GPHGifType: String {
+public enum GPHGifType: String, Decodable {
     
     /// Media is gif
     case gif
@@ -22,7 +22,7 @@ public enum GPHGifType: String {
 }
 
 /// Represents GIF rating
-public enum GPHGifRating: String {
+public enum GPHGifRating: String, Decodable {
     
     /// Rated Y
     case Y

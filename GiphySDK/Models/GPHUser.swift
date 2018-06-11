@@ -20,9 +20,9 @@ public struct GPHUser: Decodable {
         case isVerified = "is_sticker"
     }
     
-    let avatarUrl: String
-    let bannerUrl: String
-    let profileUrl: String
+    let avatarUrl: URL
+    let bannerUrl: URL
+    let profileUrl: URL
     let userName: String
     let displayName: String
     let twitterUserName: String
@@ -30,9 +30,9 @@ public struct GPHUser: Decodable {
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        avatarUrl = try container.decode(String.self, forKey: .avatarUrl)
-        bannerUrl = try container.decode(String.self, forKey: .bannerUrl)
-        profileUrl = try container.decode(String.self, forKey: .profileUrl)
+        avatarUrl = try container.decode(URL.self, forKey: .avatarUrl)
+        bannerUrl = try container.decode(URL.self, forKey: .bannerUrl)
+        profileUrl = try container.decode(URL.self, forKey: .profileUrl)
         userName = try container.decode(String.self, forKey: .userName)
         displayName = try container.decode(String.self, forKey: .displayName)
         twitterUserName = try container.decode(String.self, forKey: .twitter)

@@ -39,17 +39,17 @@ public struct GPHGif: Decodable {
     let type: GPHGifType
     let id: String
     let slug: String
-    let url: String
-    let bitlyGifUrl: String
-    let bitlyUrl: String
-    let embedUrl: String
+    let url: URL
+    let bitlyGifUrl: URL
+    let bitlyUrl: URL
+    let embedUrl: URL
     let userName: String
-    let source: String
+    let source: URL
     let rating: GPHGifRating
-    let contentUrl: String?
+    let contentUrl: URL
     let user: GPHUser?
     let sourceTld: String
-    let sourcePostUrl: String
+    let sourcePostUrl: URL
     let updateDatetime: Date
     let createDatetime: Date
     let importDatetime: Date
@@ -66,20 +66,19 @@ public struct GPHGif: Decodable {
         
         id = try container.decode(String.self, forKey: .id)
         slug = try container.decode(String.self, forKey: .slug)
-        url = try container.decode(String.self, forKey: .url)
-        bitlyGifUrl = try container.decode(String.self, forKey: .bitlyGifUrl)
-        bitlyUrl = try container.decode(String.self, forKey: .bitlyUrl)
-        embedUrl = try container.decode(String.self, forKey: .embedUrl)
+        url = try container.decode(URL.self, forKey: .url)
+        bitlyGifUrl = try container.decode(URL.self, forKey: .bitlyGifUrl)
+        bitlyUrl = try container.decode(URL.self, forKey: .bitlyUrl)
+        embedUrl = try container.decode(URL.self, forKey: .embedUrl)
         userName = try container.decode(String.self, forKey: .userName)
-        source = try container.decode(String.self, forKey: .source)
+        source = try container.decode(URL.self, forKey: .source)
         
-        let rating = try container.decode(String.self, forKey: .rating)
-        self.rating = GPHGifRating(rawValue: rating) ?? .unrated
+        rating = try container.decode(GPHGifRating.self, forKey: .rating)
         
-        contentUrl = try container.decodeIfPresent(String.self, forKey: .contentUrl)
+        contentUrl = try container.decode(URL.self, forKey: .contentUrl)
         user = try container.decode(GPHUser.self, forKey: .user)
         sourceTld = try container.decode(String.self, forKey: .sourceTld)
-        sourcePostUrl = try container.decode(String.self, forKey: .sourcePostUrl)
+        sourcePostUrl = try container.decode(URL.self, forKey: .sourcePostUrl)
         
         let updateDatetime = try container.decode(String.self, forKey: .updateDatetime).toTimeInterval()!
         self.updateDatetime = Date(timeIntervalSince1970: updateDatetime)
