@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Pagination: Decodable {
+public struct GPHPagination: Decodable {
     
     public let totalCount: Int
     public let count: Int

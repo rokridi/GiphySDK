@@ -37,7 +37,7 @@ public struct GPHStickersPack: Decodable {
     public let displayName: String
     public let shortDisplayName: String
     public let packDescription: String
-    public let bannerImage: URL
+    public let bannerImage: String
     public let hasChildren: Bool
     public let user: GPHUser
     public let featuredGif: GPHGif
@@ -53,7 +53,7 @@ public struct GPHStickersPack: Decodable {
         displayName = try container.decode(String.self, forKey: .displayName)
         shortDisplayName = try container.decode(String.self, forKey: .shortDisplayName)
         packDescription = try container.decode(String.self, forKey: .packDescription)
-        bannerImage = try container.decode(URL.self, forKey: .bannerImage)
+        bannerImage = try container.decode(String.self, forKey: .bannerImage)
         hasChildren = try container.decode(Bool.self, forKey: .hasChildren)
         user = try container.decode(GPHUser.self, forKey: .user)
         featuredGif = try container.decode(GPHGif.self, forKey: .featuredGif)

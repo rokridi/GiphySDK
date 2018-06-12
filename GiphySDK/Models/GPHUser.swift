@@ -14,29 +14,26 @@ public struct GPHUser: Decodable {
         case avatarUrl = "avatar_url"
         case bannerUrl = "banner_url"
         case profileUrl = "profile_url"
-        case userName = "user_name"
+        case userName = "username"
         case displayName = "display_name"
         case twitter
-        case isVerified = "is_sticker"
     }
     
-    let avatarUrl: URL
-    let bannerUrl: URL
-    let profileUrl: URL
+    let avatarUrl: String
+    let bannerUrl: String
+    let profileUrl: String
     let userName: String
     let displayName: String
-    let twitterUserName: String
-    let isVerified: Bool
+    let twitter: String?
     
     public init(from decoder: Decoder) throws {
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        avatarUrl = try container.decode(URL.self, forKey: .avatarUrl)
-        bannerUrl = try container.decode(URL.self, forKey: .bannerUrl)
-        profileUrl = try container.decode(URL.self, forKey: .profileUrl)
+        avatarUrl = try container.decode(String.self, forKey: .avatarUrl)
+        bannerUrl = try container.decode(String.self, forKey: .bannerUrl)
+        profileUrl = try container.decode(String.self, forKey: .profileUrl)
         userName = try container.decode(String.self, forKey: .userName)
         displayName = try container.decode(String.self, forKey: .displayName)
-        twitterUserName = try container.decode(String.self, forKey: .twitter)
-        let isVerified = try container.decode(Int.self, forKey: .isVerified)
-        self.isVerified = isVerified == 1 ? true : false
+        twitter = try container.decodeIfPresent(String.self, forKey: .twitter)
     }
 }

@@ -25,22 +25,19 @@ public enum GPHGifType: String, Decodable {
 public enum GPHGifRating: String, Decodable {
     
     /// Rated Y
-    case Y
+    case Y = "y"
     
     /// R
-    case G
+    case G = "g"
     
     /// Rated PG
-    case PG
+    case PG = "pg"
     
     /// Rated PG-13
     case PG13 = "PG-13"
     
     /// Rated R
-    case R
-    
-    /// Unrated
-    case unrated
+    case R = "r"
 }
 
 /// Represents a Giphy media rendition
@@ -106,6 +103,7 @@ public enum GPHImageRendition: String {
     
     case originalMp4 = "original_mp4"
     case previewGif = "preview_gif"
+    case previewWebp = "preview_webp"
     case still480w = "480w_still"
 }
 

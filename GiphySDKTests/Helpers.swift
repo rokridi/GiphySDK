@@ -9,25 +9,30 @@
 import Foundation
 
 class TestsHelper {
- 
-    func JSONFromFile(_ file: String) -> Data? {
+    
+    static func JSONDataFrom(file: String) throws -> Data {
         
         let bundle = Bundle(for: TestsHelper.self)
         let file = bundle.url(forResource: file, withExtension: "json")!
         
-        do {
-            return try Data(contentsOf: file)
-            
-        } catch {
-            return nil
-        }
+        return try Data(contentsOf: file)
     }
     
-    func decodeFromJsonFile<T: Decodable>(_ file: String) -> T? {
-        guard let data = JSONFromFile(file) else {
-            return nil
+    static func dicionaryFrom(file: String) throws -> [String: Any] {
+        
+        let bundle = Bundle(for: TestsHelper.self)
+        let file = bundle.url(forResource: file, withExtension: "json")!
+        
+        let data = try Data(contentsOf: file)
+        return try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
+    }
+    
+    static func modelFrom<T>(file: String, type: T.Type) throws -> T where T : Decodable {
+        
+        do {
+            let data = try JSONDataFrom(file: file)
+            let jsonDecoder = JSONDecoder()
+            return try jsonDecoder.decode(T.self, from: data)
         }
-        let jsonDecoder = JSONDecoder()
-        return try? jsonDecoder.decode(T.self, from: data)
     }
 }

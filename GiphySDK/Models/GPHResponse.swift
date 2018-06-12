@@ -12,7 +12,7 @@ public struct GPHResponse<T: Decodable> {
     
     let gifs: [T]
     let meta: Meta
-    let pagination: Pagination
+    let pagination: GPHPagination
     
     enum CodingKeys: String, CodingKey {
         case gifs = "data"
@@ -24,6 +24,6 @@ public struct GPHResponse<T: Decodable> {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         gifs = try container.decode([T].self, forKey: .gifs)
         meta = try container.decode(Meta.self, forKey: .meta)
-        pagination = try container.decode(Pagination.self, forKey: .pagination)
+        pagination = try container.decode(GPHPagination.self, forKey: .pagination)
     }
 }

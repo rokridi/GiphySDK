@@ -10,7 +10,7 @@ import Foundation
 
 public struct GPHImage: Decodable {
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case url
         case width
         case height
@@ -22,15 +22,15 @@ public struct GPHImage: Decodable {
         case webpSize = "webp_size"
     }
     
-    public let url: String
-    public let width: Int
-    public let height: Int
-    public let size: Int
-    public let frames: Int
-    public let mp4Url: String?
-    public let mp4Size: Int
-    public let webpUrl: String?
-    public let webpSize: Int
+    public var url: String?
+    public var width: Int = 0
+    public var height: Int = 0
+    public var size: Int = 0
+    public var frames: Int = 0
+    public var mp4Url: String?
+    public var mp4Size: Int = 0
+    public var webpUrl: String?
+    public var webpSize: Int = 0
     public var rendition: GPHImageRendition {
         return _rendition
     }
@@ -40,14 +40,28 @@ public struct GPHImage: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        url = try container.decode(String.self, forKey: .url)
-        width = try container.decode(Int.self, forKey: .width)
-        height = try container.decode(Int.self, forKey: .height)
-        size = try container.decodeIfPresent(Int.self, forKey: .size) ?? 0
-        frames = try container.decodeIfPresent(Int.self, forKey: .frames) ?? 0
+        url = try container.decodeIfPresent(String.self, forKey: .url)
+        
+        let width = try container.decodeIfPresent(String.self, forKey: .width)
+        self.width = Int(width ?? "") ?? 0
+        
+        let height = try container.decodeIfPresent(String.self, forKey: .height)
+        self.height = Int(height ?? "") ?? 0
+        
+        let size = try container.decodeIfPresent(String.self, forKey: .size)
+        self.size = Int(size ?? "") ?? 0
+        
+        let frames = try container.decodeIfPresent(String.self, forKey: .frames)
+        self.frames = Int(frames ?? "") ?? 0
+        
         mp4Url = try container.decodeIfPresent(String.self, forKey: .mp4)
-        mp4Size = try container.decodeIfPresent(Int.self, forKey: .mp4Size) ?? 0
+        
+        let mp4Size = try container.decodeIfPresent(String.self, forKey: .mp4Size)
+        self.mp4Size = Int(mp4Size ?? "") ?? 0
+        
         webpUrl = try container.decodeIfPresent(String.self, forKey: .webp)
-        webpSize = try container.decodeIfPresent(Int.self, forKey: .webpSize) ?? 0
+        
+        let webpSize = try container.decodeIfPresent(String.self, forKey: .webpSize)
+        self.webpSize = Int(webpSize ?? "") ?? 0
     }
 }

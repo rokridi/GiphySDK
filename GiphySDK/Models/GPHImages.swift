@@ -32,70 +32,72 @@ public struct GPHImages: Decodable {
         case looping
         case originalMp4 = "original_mp4"
         case previewGif = "preview_gif"
+        case previewWebp = "preview_webp"
         case still480w = "480w_still"
     }
     
     /// Height set to 200px. Good for mobile use.
-    private(set) var fixedHeight: GPHImage
+    var fixedHeight: GPHImage
     
     /// Static preview image for fixed_height
-    private(set) var fixedHeightStill: GPHImage
+    var fixedHeightStill: GPHImage
     
     /// Height set to 200px. Reduced to 6 frames to minimize file size to the lowest.
     /// Works well for unlimited scroll on mobile and as animated previews. See Giphy.com on mobile web as an example.
-    private(set) var fixedHeightDownsampled: GPHImage
+    var fixedHeightDownsampled: GPHImage
     
     /// Width set to 200px. Good for mobile use.
-    private(set) var fixedWidth: GPHImage
+    var fixedWidth: GPHImage
     
     /// Static preview image for fixed_width
-    private(set) var fixedWidthStill: GPHImage
+    var fixedWidthStill: GPHImage
     
     /// Width set to 200px. Reduced to 6 frames. Works well for unlimited scroll on mobile and as animated previews.
-    private(set) var fixedWidthDownsampled: GPHImage
+    var fixedWidthDownsampled: GPHImage
     
     /// Height set to 100px. Good for mobile keyboards.
-    private(set) var fixedHeightSmall: GPHImage
+    var fixedHeightSmall: GPHImage
     
     /// Static preview image for fixed_height_small
-    private(set) var fixedHeightSmallStill: GPHImage
+    var fixedHeightSmallStill: GPHImage
     
     /// Width set to 100px. Good for mobile keyboards.
-    private(set) var fixedWidthSmall: GPHImage
+    var fixedWidthSmall: GPHImage
     
     /// Static preview image for fixed_width_small
-    private(set) var fixedWidthSmallStill: GPHImage
+    var fixedWidthSmallStill: GPHImage
     
     /// File size under 50kb. Duration may be truncated to meet file size requirements. Good for thumbnails and previews.
-    private(set) var preview: GPHImage
+    var preview: GPHImage
     
     /// File size under 200kb.
-    private(set) var downsizedSmall: GPHImage
+    var downsizedSmall: GPHImage
     
     /// File size under 2mb.
-    private(set) var downsized: GPHImage
+    var downsized: GPHImage
     
     /// File size under 5mb.
-    private(set) var downsizedMedium: GPHImage
+    var downsizedMedium: GPHImage
     
     /// File size under 8mb.
-    private(set) var downsizedLarge: GPHImage
+    var downsizedLarge: GPHImage
     
     /// Static preview image for downsized.
-    private(set) var downsizedStill: GPHImage
+    var downsizedStill: GPHImage
     
     /// Original file size and file dimensions. Good for desktop use.
-    private(set) var original: GPHImage
+    var original: GPHImage
     
     /// Preview image for original.
-    private(set) var originalStill: GPHImage
+    var originalStill: GPHImage
     
     /// Duration set to loop for 15 seconds. Only recommended for this exact use case.
-    private(set) var looping: GPHImage
+    var looping: GPHImage
     
-    private(set) var originalMp4: GPHImage
-    private(set) var previewGif: GPHImage
-    private(set) var still480w: GPHImage
+    var originalMp4: GPHImage
+    var previewGif: GPHImage
+    var previewWebp: GPHImage
+    var still480w: GPHImage
     
     
     
@@ -125,6 +127,7 @@ public struct GPHImages: Decodable {
         looping = try container.decode(GPHImage.self, forKey: .looping)
         originalMp4 = try container.decode(GPHImage.self, forKey: .originalMp4)
         previewGif = try container.decode(GPHImage.self, forKey: .previewGif)
+        previewWebp = try container.decode(GPHImage.self, forKey: .previewWebp)
         still480w = try container.decode(GPHImage.self, forKey: .still480w)
         
         setRenditions()
